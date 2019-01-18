@@ -1,11 +1,8 @@
 import Panel from "../../libs/panel"
 import directionTemplate from '../../views/direction/direction.dot'
 import DirectionInput from "../../ui_components/direction_input"
-import PanelManager from '../../proxies/panel_manager'
 import RoadMapPanel from './road_map_panel'
 import DirectionApi from '../../adapters/direction_api'
-
-
 
 export default class DirectionPanel {
   constructor() {
@@ -20,7 +17,7 @@ export default class DirectionPanel {
     this.end = null
     this.vehicle = this.DRIVING
     this.roadMapPanel = new RoadMapPanel()
-    PanelManager.register(this)
+    this.restore()
   }
 
   initDirection() {
@@ -99,5 +96,12 @@ export default class DirectionPanel {
         fire('set_route', {routes : routes, vehicle : this.vehicle, start : this.start, end : this.end})
       }
     }
+  }
+
+  /* urlState interface implementation */
+
+  restore() {
+    let rawGetParams = window.location.search.split('&')
+    let getParams = rawGetParams.map((rawParam) => rawParam.split('='))
   }
 }
