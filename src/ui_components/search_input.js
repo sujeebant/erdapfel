@@ -15,11 +15,10 @@ export default class SearchInput {
 
   /* Singleton */
   static initSearchInput(tagSelector) {
-    if(window.__searchInput) {
-      return window.__searchInput
-    } else {
+    if(! window.__searchInput) {
       window.__searchInput = new SearchInput(tagSelector)
     }
+    return window.__searchInput
   }
 
   static minify() {
